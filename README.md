@@ -17,4 +17,10 @@ cd project-name
 
 # ビルド & 実行
 cargo run
+
+# ビルド & エラーのチェック
+cargo check
+
+# リリースビルド
+cargo build --release
 ```
