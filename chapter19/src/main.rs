@@ -115,6 +115,18 @@ impl fmt::Display for Wrapper {
     }
 }
 
+fn add_one(x: i32) -> i32 {
+    x + 1
+}
+
+fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
+    f(arg) + f(arg)
+}
+
+
+fn returns_closure() -> Box<dyn Fn(i32) -> i32> {
+    Box::new(|x| x + 1)
+}
 
 fn main() {
     let mut num = 5;
@@ -158,4 +170,27 @@ fn main() {
 
     let w = Wrapper(vec![String::from("hello"), String::from("world")]);
     println!("w = {}", w);
+
+    type Thunk = Box<dyn Fn() + Send + 'static>;
+
+    let f: Thunk = Box::new(|| println!("hi"));
+
+    // fn takes_long_type(f: Thunk) {
+    //     // --snip--
+    // }
+    //
+    // fn returns_long_type() -> Thunk {
+    //     // --snip--
+    // }
+
+    let answer = do_twice(add_one, 5);
+
+    println!("The answer is: {}", answer);
+
+    let list_of_numbers = vec![1, 2, 3];
+    let list_of_strings: Vec<String> = list_of_numbers
+        .iter()
+        .map(ToString::to_string)
+        .collect();
+
 }
