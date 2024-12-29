@@ -25,3 +25,7 @@ cargo check
 # リリースビルド
 cargo build --release
 ```
+
+## 参考
+
+- [RealWorld 業務 Rust #怪文書 - Qiita](https://qiita.com/legokichi/items/4e85ec1e74f4e754fb94)
